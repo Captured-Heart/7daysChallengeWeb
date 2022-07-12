@@ -13,7 +13,8 @@ abstract class LocaleInterface {
   String andThe = '';
   String code = '';
   String firstPageUiDeveloper = '';
-
+  String sevendays = '';
+  String challenge = '';
   String firstPageFlutterDeveloper = '';
   String navBarLogo = '';
 

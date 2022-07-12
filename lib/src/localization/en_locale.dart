@@ -46,4 +46,10 @@ class ENLocale implements LocaleInterface {
   
   @override
   String ui = 'UI ';
+  
+  @override
+  String challenge = 'challenge';
+  
+  @override
+  String sevendays = '#7Days ';
 }

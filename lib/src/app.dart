@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:seven_days_web/Providers/app_theme.dart';
+import 'package:seven_days_web/src/Theme/theme_class.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/ist_div_screen.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({
     Key? key,
     required this.settingsController,
@@ -16,17 +19,15 @@ class MyApp extends StatelessWidget {
   final SettingsController settingsController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lightMode = ref.watch(setLightMode);
+    final darkMode = ref.watch(setDarkMode);
+
     return AnimatedBuilder(
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
-          // Providing a restorationScopeId allows the Navigator built by the
-          // MaterialApp to restore the navigation stack when a user leaves and
-          // returns to the app after it has been killed while running in the
-          // background.
           restorationScopeId: 'app',
-
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -34,21 +35,13 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale('en', ''), // English, no country code
+            Locale('en', ''),
           ],
-
-          // Use AppLocalizations to configure the correct application title
-          // depending on the user's locale.
-          //
-          // The appTitle is defined in .arb files found in the localization
-          // directory.
           onGenerateTitle: (BuildContext context) =>
               AppLocalizations.of(context)!.appTitle,
-
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: lightMode,
+          darkTheme: darkMode,
           themeMode: settingsController.themeMode,
-
           onGenerateRoute: (RouteSettings routeSettings) {
             return MaterialPageRoute<void>(
               settings: routeSettings,

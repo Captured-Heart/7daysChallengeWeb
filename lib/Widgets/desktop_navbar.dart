@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seven_days_web/Providers/app_theme.dart';
 import 'package:seven_days_web/src/localization/locales.dart';
 import 'package:seven_days_web/src/utils/color_constant.dart';
 
-class DesktopNavBar extends StatefulWidget implements PreferredSizeWidget {
+class DesktopNavBar extends ConsumerStatefulWidget
+    implements PreferredSizeWidget {
   const DesktopNavBar({
     Key? key,
     required this.size,
@@ -18,13 +22,13 @@ class DesktopNavBar extends StatefulWidget implements PreferredSizeWidget {
   final Size size;
   final VoidCallback onTapAbout, onTapHome, onTapPortfolio, onTopContact;
   @override
-  State<DesktopNavBar> createState() => _DesktopNavBarState();
+  DesktopNavBarState createState() => DesktopNavBarState();
 
   @override
-  Size get preferredSize => Size.fromHeight(100);
+  Size get preferredSize => Size.fromHeight(120);
 }
 
-class _DesktopNavBarState extends State<DesktopNavBar> {
+class DesktopNavBarState extends ConsumerState<DesktopNavBar> {
   final List _hover = [
     false,
     false,
@@ -33,8 +37,10 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final value = ref.watch(isDarkModeProvider);
+    final themeMode = ref.watch(themeModeProvider);
     return Container(
-      height: widget.size.height * 0.08,
+      height: widget.size.height * 0.09,
       padding: EdgeInsets.symmetric(horizontal: widget.size.width * 0.06),
       decoration: BoxDecoration(
         // color: Colors.white,
@@ -51,18 +57,18 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
             AppLocales.of(context).navBarLogo,
             style: GoogleFonts.dancingScript(
               wordSpacing: 10,
-              letterSpacing: 3,
-              fontSize: 30,
+              letterSpacing: 6,
+              fontSize: 35,
               foreground: Paint()
-                ..strokeWidth = 2
-                ..color = Colors.purple
+                ..strokeWidth = 4
+                ..color = ColorConstant.textWhiteColor
                 ..style = PaintingStyle.stroke,
               // color: Colors.purple
             ),
             textScaleFactor: 1.4,
           ),
           SizedBox(
-            width: widget.size.width * 0.35,
+            width: widget.size.width * 0.45,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,6 +112,42 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
                       AppLocales.of(context).navBarContact,
                       style: textStyle(_hover, 2),
                     )),
+                FlutterSwitch(
+                  width: 100.0,
+                  height: 50.0,
+                  toggleSize: 45.0,
+                  value: value,
+                  borderRadius: 30.0,
+                  padding: 2.0,
+                  activeToggleColor: Color(0xFF6E40C9),
+                  inactiveToggleColor: Color(0xFF2F363D),
+                  activeSwitchBorder: Border.all(
+                    color: Color(0xFF3C1E70),
+                    width: 6.0,
+                  ),
+                  inactiveSwitchBorder: Border.all(
+                    color: Color(0xFFD1D5DA),
+                    width: 6.0,
+                  ),
+                  activeColor: Color(0xFF271052),
+                  inactiveColor: Colors.white,
+                  activeIcon: Icon(
+                    Icons.nightlight_round,
+                    color: Color(0xFFF8E3A1),
+                  ),
+                  inactiveIcon: Icon(
+                    Icons.wb_sunny,
+                    color: Color(0xFFFFDF5D),
+                  ),
+                  onToggle: (val) {
+                    if(val){
+                      ref.read(themeModeProvider.state).update((state) => ThemeMode.dark);
+                    }else{
+                      ref.read(themeModeProvider.state).update((state) => ThemeMode.light);
+
+                    }
+                  },
+                ),
               ],
             ),
           ),
@@ -115,11 +157,12 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
   }
 }
 
-TextStyle textStyle(dynamic _hover, int index) {
+TextStyle textStyle(dynamic hover, int index) {
   return TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: !_hover[index] ? 18 : 20,
-    letterSpacing: 3,
-    color: !_hover[index] ?  ColorConstant.textWhiteColor : ColorConstant.lightTeal
-  );
+      fontWeight: FontWeight.bold,
+      fontSize: !hover[index] ? 18 : 20,
+      letterSpacing: 3,
+      color: !hover[index]
+          ? ColorConstant.textWhiteColor
+          : ColorConstant.lightTeal);
 }

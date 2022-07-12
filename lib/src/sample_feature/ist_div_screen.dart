@@ -205,7 +205,7 @@ class _IstDivScreenState extends State<IstDivScreen> {
                     Positioned(
                       bottom: 0,
                       left: 0,
-                      right: 0,
+                      right: 10,
                       // alignment: Alignment.bottomCenter,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

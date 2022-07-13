@@ -28,6 +28,7 @@ class IstScreen extends StatelessWidget {
                   'assets/images/UI.png',
                   height: size.height * 0.15,
                   fit: BoxFit.contain,
+                  color: Theme.of(context).highlightColor.withOpacity(0.3),
                 ),
               ),
               Positioned(
@@ -37,6 +38,7 @@ class IstScreen extends StatelessWidget {
                   'assets/images/Code.png',
                   height: size.height * 0.5,
                   fit: BoxFit.contain,
+                  color: Theme.of(context).highlightColor.withOpacity(0.8),
                 ),
               ),
               Positioned(
@@ -56,7 +58,6 @@ class IstScreen extends StatelessWidget {
         Expanded(
           child: Stack(
             fit: StackFit.expand,
-           
             children: [
               Stack(
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,17 +68,11 @@ class IstScreen extends StatelessWidget {
                     child: AutoSizeText.rich(
                       TextSpan(
                           text: AppLocales.of(context).firstPageHI,
-                          style: TextStyle(
-                            color: ColorConstant.textWhiteColor,
-                            fontSize: 30,
-                          ),
+                          style: Theme.of(context).textTheme.headline1,
                           children: [
                             TextSpan(
                               text: AppLocales.of(context).firstPageHumans,
-                              style: TextStyle(
-                                color: ColorConstant.lightTeal,
-                                fontSize: 30,
-                              ),
+                              style: Theme.of(context).textTheme.headline3,
                             )
                           ]),
                       maxLines: 1,
@@ -92,22 +87,11 @@ class IstScreen extends StatelessWidget {
                     child: AutoSizeText.rich(
                       TextSpan(
                           text: AppLocales.of(context).andWeAre,
-                          style: TextStyle(
-                            color: ColorConstant.textWhiteColor,
-                            fontSize: 30,
-                          ),
+                          style: Theme.of(context).textTheme.headline1,
                           children: [
                             TextSpan(
                               text: AppLocales.of(context).firstPageDevelopers,
-                              style: TextStyle(
-                                // color: ColorConstant.lightTeal,
-                                fontSize: 32,
-                                letterSpacing: 3,
-                                foreground: Paint()
-                                  ..strokeWidth = 2.8
-                                  ..color = ColorConstant.lightTeal
-                                  ..style = PaintingStyle.stroke,
-                              ),
+                              style: Theme.of(context).textTheme.headline3,
                             )
                           ]),
                       maxLines: 1,
@@ -120,39 +104,19 @@ class IstScreen extends StatelessWidget {
                     child: AutoSizeText.rich(
                       TextSpan(
                           text: AppLocales.of(context).the,
-                          style: TextStyle(
-                            color: ColorConstant.textWhiteColor,
-                            fontSize: 30,
-                          ),
+                          style: Theme.of(context).textTheme.headline1,
                           children: [
                             TextSpan(
                               text: AppLocales.of(context).ui,
-                              style: TextStyle(
-                                fontSize: 35,
-                                foreground: Paint()
-                                  ..strokeWidth = 3
-                                  ..color = ColorConstant.lightTeal
-                                  ..style = PaintingStyle.stroke,
-                              ),
+                              style: Theme.of(context).textTheme.headline5,
                             ),
                             TextSpan(
                               text: AppLocales.of(context).andThe,
-                              style: TextStyle(
-                                color: ColorConstant.textWhiteColor,
-                                fontSize: 35,
-                              ),
+                              style: Theme.of(context).textTheme.headline2,
                             ),
                             TextSpan(
                               text: AppLocales.of(context).code,
-                              style: TextStyle(
-                                // color: ColorConstant.lightTeal,
-                                fontSize: 40,
-                                letterSpacing: 5,
-                                foreground: Paint()
-                                  ..strokeWidth = 3.2
-                                  ..color = ColorConstant.lightTeal
-                                  ..style = PaintingStyle.stroke,
-                              ),
+                              style: Theme.of(context).textTheme.headline5,
                             )
                           ]),
                       maxLines: 1,
@@ -193,27 +157,12 @@ class IstScreen extends StatelessWidget {
                             //? Cornelius Text
                             Text(
                               AppLocales.of(context).firstPageCornelius,
-                              style: GoogleFonts.lato(
-                                fontSize: 30,
-                                letterSpacing: 6,
-                                foreground: Paint()
-                                  ..strokeWidth = 2
-                                  ..color = ColorConstant.textWhiteColor
-                                  ..style = PaintingStyle.stroke,
-                              ),
+                              style: Theme.of(context).textTheme.headline1,
                               textScaleFactor: 1.4,
                             ),
                             Text(
                               AppLocales.of(context).firstPageUiDeveloper,
-                              style: GoogleFonts.lato(
-                                fontSize: 30,
-                                letterSpacing: 6,
-                                wordSpacing: 5,
-                                foreground: Paint()
-                                  ..strokeWidth = 2
-                                  ..color = ColorConstant.lightTeal
-                                  ..style = PaintingStyle.stroke,
-                              ),
+                              style:  Theme.of(context).textTheme.headline3,
                             )
                           ],
                         ),
@@ -237,26 +186,11 @@ class IstScreen extends StatelessWidget {
                             Text(
                               AppLocales.of(context).firstPageMarcel,
                               textScaleFactor: 1.4,
-                              style: GoogleFonts.lato(
-                                fontSize: 30,
-                                letterSpacing: 6,
-                                foreground: Paint()
-                                  ..strokeWidth = 2
-                                  ..color = ColorConstant.textWhiteColor
-                                  ..style = PaintingStyle.stroke,
-                              ),
+                              style: Theme.of(context).textTheme.headline1,
                             ),
                             Text(
                               AppLocales.of(context).firstPageFlutterDeveloper,
-                              style: GoogleFonts.lato(
-                                fontSize: 30,
-                                letterSpacing: 6,
-                                wordSpacing: 5,
-                                foreground: Paint()
-                                  ..strokeWidth = 2
-                                  ..color = ColorConstant.lightTeal
-                                  ..style = PaintingStyle.stroke,
-                              ),
+                              style: Theme.of(context).textTheme.headline3,
                             ),
                           ],
                         )
@@ -265,7 +199,7 @@ class IstScreen extends StatelessWidget {
 
                     //! 7days challenge div
                     Positioned(
-                      left: size.width * 0.3,
+                      left: size.width * 0.31,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -273,39 +207,30 @@ class IstScreen extends StatelessWidget {
                           AutoSizeText.rich(
                             TextSpan(
                                 text: AppLocales.of(context).sevendays,
-                                style: TextStyle(
-                                  // color: ColorConstant.textWhiteColor,
-                                  fontSize: 28,
-                                  letterSpacing: 4,
-                                  foreground: Paint()
-                                    ..strokeWidth = 2.5
-                                    ..color = ColorConstant.textWhiteColor
-                                    ..style = PaintingStyle.stroke,
-                                ),
+                                style: Theme.of(context).textTheme.headline1,
                                 children: [
                                   TextSpan(
-                                    text: AppLocales.of(context).navBarLogo,
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      foreground: Paint()
-                                        ..strokeWidth = 4
-                                        ..color = ColorConstant.lightTeal
-                                        ..style = PaintingStyle.stroke,
-                                    ),
+                                    text: AppLocales.of(context).code,
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
+                                  ),
+                                  TextSpan(
+                                    text: AppLocales.of(context).vs,
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
+                                  TextSpan(
+                                    text: AppLocales.of(context).ui,
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
                                   ),
                                 ]),
                             maxLines: 1,
-                            textScaleFactor: 1.4,
+                            textScaleFactor: 1.2,
                           ),
                           AutoSizeText(
                             AppLocales.of(context).challenge,
-                            style: TextStyle(
-                              fontSize: 27,
-                              foreground: Paint()
-                                ..strokeWidth = 2.5
-                                ..color = ColorConstant.textWhiteColor
-                                ..style = PaintingStyle.stroke,
-                            ),
+                            style: Theme.of(context).textTheme.headline1,
                             textScaleFactor: 1.4,
                           )
                         ],

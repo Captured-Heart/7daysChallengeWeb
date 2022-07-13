@@ -3,50 +3,72 @@ import 'package:flutter/scheduler.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:seven_days_web/src/Theme/theme_class.dart';
 
-final themeModeProvider = StateProvider((ref) => ThemeMode.system);
+
+// final theme = Provider((ref) => MyTheme());
+final themeModeProvider = StateProvider((ref) => ThemeMode.dark);
 final setLightMode = StateProvider<ThemeData>((ref) => MyTheme.lightTheme);
+
+
 final setDarkMode = StateProvider<ThemeData>((ref) => MyTheme.darkTheme);
 
-// final themeModeMain = StateProvider((ref) {
-//   final themeMode = ref.watch(theme);
+// // final themeModeMain = StateProvider((ref) {
+// //   final themeMode = ref.watch(theme);
 
-//   if (themeMode == ThemeMode.system) {
-//     final brightness = SchedulerBinding.instance.window.platformBrightness;
-//     return brightness == Brightness.light;
-//   } else {
-//     return themeMode == ThemeMode.light;
-//   }
+// //   if (themeMode == ThemeMode.system) {
+// //     final brightness = SchedulerBinding.instance.window.platformBrightness;
+// //     return brightness == Brightness.light;
+// //   } else {
+// //     return themeMode == ThemeMode.light;
+// //   }
   
-// });
-final isDarkModeProvider = Provider < bool > ((ref) {
-  final themeMode = ref.watch(themeModeProvider.state).state;
+// // });
+// final isDarkModeProvider = Provider < bool > ((ref) {
+//   final themeMode = ref.watch(themeModeProvider.state).state;
     
-  return themeMode == ThemeMode.dark;
-});
+//   return themeMode == ThemeMode.dark;
+// });
 
 
+// // ignore: non_constant_identifier_names
+// final appThemeStateNotifier = StateNotifierProvider((ref) {
+//   return ThemeProvider();
+// });
 
-// class ThemeProvider extends StateNotifier {
-//   ThemeMode themeMode = ThemeMode.system;
+class ThemeProvider extends ChangeNotifier {
+  ThemeMode themeMode = ThemeMode.system;
 
-//   ThemeProvider() :super(false);
+  // ThemeProvider() :super(false);
 
-//   bool get isDarkMode {
-//     if (themeMode == ThemeMode.system) {
+// void setLightTheme() => state = false;
+//   void setDarkTheme() => state = true;
+
+
+  bool get isDarkMode {
+    if (themeMode == ThemeMode.system) {
+      final brightness = SchedulerBinding.instance.window.platformBrightness;
+      return brightness == Brightness.light;
+    } else {
+      return themeMode == ThemeMode.light;
+    }
+  }
+
+
+// final isDarkModeProvider = Provider <bool>((ref) {
+//   final themeMode = ref.watch(themeModeProvider.state).state;
+//      if (themeMode == ThemeMode.system) {
 //       final brightness = SchedulerBinding.instance.window.platformBrightness;
 //       return brightness == Brightness.light;
 //     } else {
 //       return themeMode == ThemeMode.light;
 //     }
-//   }
+//   // return themeMode == ThemeMode.dark;
+// });
+   toggleTheme(bool isOn) {
+    themeMode = isOn ? ThemeMode.light : ThemeMode.dark;
+    notifyListeners();
+  }
 
-//   void toggleTheme(bool isOn) {
-//     themeMode = isOn ? ThemeMode.light : ThemeMode.dark;
-//     notifyListeners();
-//   }
-// }
-
-// final setDarkMode = StateProvider((ref) => true,);
+}
 
 
 

@@ -4,7 +4,13 @@ class ColorConstant {
   static Color lightTeal = fromHex('#5CD3D0');
   static Color darkBgColor = fromHex('#052728');
   static Color lightBgColor = fromHex('#B2C8C8');
-  static Color textWhiteColor = fromHex('#ffffff');
+  static Color textWhiteColor = fromHex('#ffffff'); 
+  static Color textBlackColor = fromHex('#000000'); 
+
+  static Color shapeColorDarkBg = fromHex('#014143');
+  static Color shapeColorLightBg = fromHex('#266F72');
+
+  // #004749CC
 
 
 

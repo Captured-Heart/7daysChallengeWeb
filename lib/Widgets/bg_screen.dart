@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class SevenDaysBG extends StatelessWidget {
-  const SevenDaysBG({
-    Key? key,
-    required this.size,
-    this.navBar,
-    // required 
-    this.child
-  }) : super(key: key);
+  const SevenDaysBG(
+      {Key? key,
+      required this.size,
+      this.navBar,
+      // required
+      this.child})
+      : super(key: key);
 
   final Size size;
-  final Widget ? child, navBar;
+  final Widget? child, navBar;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SevenDaysBG extends StatelessWidget {
       width: size.width,
       child: Stack(
         children: [
-         navBar!,
+          navBar!,
           Positioned(
             left: 0,
             top: 0,
@@ -27,6 +27,7 @@ class SevenDaysBG extends StatelessWidget {
               'assets/images/circleBG.png',
               height: size.height * 0.635,
               fit: BoxFit.cover,
+              color: Theme.of(context).canvasColor,
             ),
           ),
           Positioned(
@@ -37,9 +38,10 @@ class SevenDaysBG extends StatelessWidget {
               'assets/images/wavyBG.png',
               height: size.height * 0.58,
               fit: BoxFit.cover,
+              color: Theme.of(context).canvasColor,
             ),
           ),
-         child!
+          child!
         ],
       ),
     );

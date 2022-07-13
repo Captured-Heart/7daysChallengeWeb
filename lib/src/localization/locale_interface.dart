@@ -10,6 +10,7 @@ abstract class LocaleInterface {
   String andWeAre = '';
   String the = '';
   String ui = '';
+  String vs = '';
   String andThe = '';
   String code = '';
   String firstPageUiDeveloper = '';

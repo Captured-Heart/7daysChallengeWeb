@@ -39,7 +39,7 @@ class ENLocale implements LocaleInterface {
   String andThe = 'and The ';
   
   @override
-  String code = 'Code';
+  String code = 'Code ';
   
   @override
   String the = 'The ';
@@ -52,4 +52,7 @@ class ENLocale implements LocaleInterface {
   
   @override
   String sevendays = '#7Days ';
+  
+  @override
+  String vs = 'vs ';
 }

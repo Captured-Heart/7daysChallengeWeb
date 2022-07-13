@@ -31,7 +31,7 @@ class _IstDivScreenState extends State<IstDivScreen> {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: ColorConstant.darkBgColor,
+      // backgroundColor: ColorConstant.darkBgColor,
       body: SevenDaysBG(
         size: size,
         navBar: Positioned(

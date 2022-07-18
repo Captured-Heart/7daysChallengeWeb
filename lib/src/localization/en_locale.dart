@@ -33,7 +33,7 @@ class ENLocale implements LocaleInterface {
   String navBarHome = 'Home';
 
   @override
-  String navBarWork = 'Our work';
+  String navBarWork = 'Projects';
   
   @override
   String andThe = 'and The ';
@@ -55,4 +55,28 @@ class ENLocale implements LocaleInterface {
   
   @override
   String vs = 'vs ';
+  
+  @override
+  String aboutUs = 'About Us';
+  
+  @override
+  String aboutUsContent = 'ugfruegpfg98upfgeruptfg8erytfg8erypptfg89ptfg9erpufgupt9erppfgterp7tfg89erpfgt7p';
+  
+  @override
+  String contactUs = 'Contact Us';
+  
+  @override
+  String corenliusEmail = 'michaelcrnls@gmail.com';
+  
+  @override
+  String corneliusGitHub = '@michaelcrnls';
+  
+  @override
+  String marcelEmail = 'knkpozi@gmail.com';
+  
+  @override
+  String marcelGitHub = 'https://github.com/Captured-Heart' ;
+
+  @override
+  String projects = 'Projects';
 }

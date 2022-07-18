@@ -13,12 +13,12 @@ TextTheme darkTextTheme(TextTheme base) {
     ),
     headline2: base.headline2!.copyWith(
       color: ColorConstant.lightTeal,
-      fontSize: 30,
+      fontSize: 23,
     ),
     headline3: base.headline3!.copyWith(
       fontSize: 33,
       letterSpacing: 5,
-      foreground: Paint()
+      foreground:  Paint()
         ..strokeWidth = 3
         ..color = ColorConstant.lightTeal
         ..style = PaintingStyle.stroke,
@@ -61,9 +61,10 @@ TextTheme _lightTextTheme(TextTheme base) {
         ..color = ColorConstant.darkBgColor.withOpacity(0.7)
         ..style = PaintingStyle.stroke,
     ),
+
     headline2: base.headline2!.copyWith(
       color: ColorConstant.darkBgColor,
-      fontSize: 30,
+      fontSize: 23,
     ),
 
     //?  3
@@ -85,6 +86,8 @@ TextTheme _lightTextTheme(TextTheme base) {
         ..color = ColorConstant.textBlackColor
         ..style = PaintingStyle.stroke,
     ),
+
+    //? 5
     headline5: base.headline5!.copyWith(
       fontSize: 35,
       letterSpacing: 5,
@@ -93,6 +96,8 @@ TextTheme _lightTextTheme(TextTheme base) {
         ..color = ColorConstant.lightTeal
         ..style = PaintingStyle.stroke,
     ),
+
+    //? 6
     headline6: base.headline6!.copyWith(
       fontSize: 30,
       letterSpacing: 5,
@@ -101,6 +106,8 @@ TextTheme _lightTextTheme(TextTheme base) {
         ..color = ColorConstant.textBlackColor
         ..style = PaintingStyle.stroke,
     ),
+
+    
   );
 }
 
@@ -109,7 +116,7 @@ class MyTheme {
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: ColorConstant.darkBgColor,
     primaryColor: const Color(0xff272c3a),
-    iconTheme: const IconThemeData(color: Color(0xff58A4EB), opacity: 0.8),
+    iconTheme:  IconThemeData(color: ColorConstant.lightTeal),
     highlightColor: ColorConstant.shapeColorLightBg,
     canvasColor: ColorConstant.shapeColorDarkBg,
     textTheme: darkTextTheme(ThemeData.dark().textTheme),
@@ -128,7 +135,7 @@ class MyTheme {
     highlightColor: ColorConstant.shapeColorDarkBg,
 
     primaryColor: Colors.white,
-    iconTheme: const IconThemeData(color: Color(0xff58A4EB), opacity: 0.8),
+    iconTheme: const IconThemeData(color: Color(0xff000000), opacity: 0.7),
     canvasColor: ColorConstant.shapeColorLightBg,
     textTheme: _lightTextTheme(ThemeData.light().textTheme),
     textSelectionTheme: const TextSelectionThemeData(

@@ -1,35 +1,35 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider ;
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:provider/provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seven_days_web/Presentation/Widgets/theme_switch.dart';
 import 'package:seven_days_web/Providers/app_theme.dart';
 import 'package:seven_days_web/src/localization/locales.dart';
 import 'package:seven_days_web/src/utils/color_constant.dart';
 
-class DesktopNavBar extends ConsumerStatefulWidget
+class DesktopNavBar1 extends ConsumerStatefulWidget
     implements PreferredSizeWidget {
-  const DesktopNavBar({
+  const DesktopNavBar1({
     Key? key,
     required this.size,
     required this.onTapAbout,
     required this.onTapHome,
     required this.onTapPortfolio,
-    required this.onTopContact,
   }) : super(key: key);
 
   final Size size;
-  final VoidCallback onTapAbout, onTapHome, onTapPortfolio, onTopContact;
+  final VoidCallback onTapAbout, onTapHome, onTapPortfolio;
   @override
-  DesktopNavBarState createState() => DesktopNavBarState();
+  DesktopNavBar1State createState() => DesktopNavBar1State();
 
   @override
   Size get preferredSize => Size.fromHeight(120);
 }
 
-class DesktopNavBarState extends ConsumerState<DesktopNavBar> {
+class DesktopNavBar1State extends ConsumerState<DesktopNavBar1> {
   final List _hover = [
     false,
     false,
@@ -115,6 +115,8 @@ class DesktopNavBarState extends ConsumerState<DesktopNavBar> {
                       AppLocales.of(context).navBarContact,
                       style: textStyle(_hover, 2, context),
                     )),
+
+                    //! SWITCH
                 FlutterSwitch(
                   width: 100.0,
                   height: 50.0,
@@ -122,23 +124,23 @@ class DesktopNavBarState extends ConsumerState<DesktopNavBar> {
                   value: themeProvider.isDarkMode,
                   borderRadius: 30.0,
                   padding: 2.0,
-                  activeToggleColor: Color(0xFF6E40C9),
-                  inactiveToggleColor: Color(0xFF2F363D),
+                  activeToggleColor: const Color(0xFF6E40C9),
+                  inactiveToggleColor: const Color(0xFF2F363D),
                   activeSwitchBorder: Border.all(
-                    color: Color(0xFF3C1E70),
+                    color: const Color(0xFF3C1E70),
                     width: 6.0,
                   ),
                   inactiveSwitchBorder: Border.all(
-                    color: Color(0xFFD1D5DA),
+                    color: const Color(0xFFD1D5DA),
                     width: 6.0,
                   ),
                   activeColor: ColorConstant.darkBgColor,
                   inactiveColor: Colors.white,
-                  activeIcon: Icon(
+                  activeIcon: const Icon(
                     Icons.nightlight_round,
                     color: Color(0xFFF8E3A1),
                   ),
-                  inactiveIcon: Icon(
+                  inactiveIcon: const Icon(
                     Icons.wb_sunny,
                     color: Color(0xFFFFDF5D),
                   ),
@@ -146,20 +148,6 @@ class DesktopNavBarState extends ConsumerState<DesktopNavBar> {
                     final provider =
                         Provider.of<ThemeProvider>(context, listen: false);
                     provider.toggleTheme(valu);
-                    
-                    // if(valu){
-                    //   // final provider = ref.watch(ThemeProvider);
-                    // ref.read(appThemeStateNotifier.notifier).setDarkTheme();
-
-                    //   // ref.read(themeModeProvider.state).update((state) => ThemeMode.dark);
-                    // }else{
-                    // ref.read(appThemeStateNotifier.notifier).setLightTheme();
-
-                    // // ref.read(FinalProvider.notifier).themeMode = ThemeMode.light;
-
-                    //   // ref.read(themeModeProvider.state).update((state) => ThemeMode.light);
-
-                    // }
                   },
                 ),
               ],
@@ -172,7 +160,10 @@ class DesktopNavBarState extends ConsumerState<DesktopNavBar> {
 }
 
 TextStyle textStyle(dynamic hover, int index, BuildContext context) {
-  return !hover[index]  ? 
-  
-  Theme.of(context).textTheme.headline1!  :  Theme.of(context).textTheme.headline2!;
+  return !hover[index]
+      ? Theme.of(context).textTheme.headline1!.copyWith(
+            fontSize: 18,
+            fontWeight: FontWeight.w200,
+          )
+      : Theme.of(context).textTheme.headline2!;
 }

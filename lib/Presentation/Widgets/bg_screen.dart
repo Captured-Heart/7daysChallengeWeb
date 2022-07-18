@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seven_days_web/src/utils/responsive.dart';
 
 class SevenDaysBG extends StatelessWidget {
   const SevenDaysBG(
@@ -18,14 +19,16 @@ class SevenDaysBG extends StatelessWidget {
       height: size.height,
       width: size.width,
       child: Stack(
+        // fit: StackFit.expand,
         children: [
-          navBar!,
           Positioned(
             left: 0,
             top: 0,
             child: Image.asset(
               'assets/images/circleBG.png',
-              height: size.height * 0.635,
+              height: Responsive.isMobile(context)
+                  ? size.height * 0.35
+                  : size.height * 0.635,
               fit: BoxFit.cover,
               color: Theme.of(context).canvasColor,
             ),
@@ -36,12 +39,15 @@ class SevenDaysBG extends StatelessWidget {
             bottom: 0,
             child: Image.asset(
               'assets/images/wavyBG.png',
-              height: size.height * 0.58,
-              fit: BoxFit.cover,
+              height: Responsive.isMobile(context)
+                  ? size.height * 0.45
+                  : size.height * 0.58,
+              fit: Responsive.isMobile(context) ? BoxFit.fill : BoxFit.cover,
               color: Theme.of(context).canvasColor,
             ),
           ),
-          child!
+          child!,
+          navBar!,
         ],
       ),
     );

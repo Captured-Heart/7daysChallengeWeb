@@ -18,7 +18,14 @@ abstract class LocaleInterface {
   String challenge = '';
   String firstPageFlutterDeveloper = '';
   String navBarLogo = '';
-
+  String aboutUs = '';
+  String contactUs = '';
+  String corenliusEmail = '';
+  String corneliusGitHub = '';
+  String marcelEmail = '';
+  String marcelGitHub = '';
+  String aboutUsContent = '';
+  String projects = '';
   //
 
 }

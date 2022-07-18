@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seven_days_web/src/utils/responsive.dart';
 
 class ClipLeftBackground extends StatelessWidget {
   const ClipLeftBackground({
@@ -21,12 +22,14 @@ class ClipLeftBackground extends StatelessWidget {
         ClipPath(
           // ignore: sort_child_properties_last
           child: Container(
-            height: size.height * 0.4,
+            height: Responsive.isMobile(context)
+                ? size.height * 0.3
+                : size.height * 0.4,
             width: size.width * 0.4,
             decoration: BoxDecoration(
-                color: left ? const Color(0xff483134) : const Color(0xff171721),
-                //TODO: ADD NEUMORPHISM TO CONTAINER
-               ),
+              color: left ? const Color(0xff483134) : const Color(0xff171721),
+              //TODO: ADD NEUMORPHISM TO CONTAINER
+            ),
           ),
           clipper: left ? CustomClipPath() : CustomClipRightPath(),
         ),

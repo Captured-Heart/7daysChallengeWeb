@@ -94,6 +94,10 @@ class ThirdScreenDesktop extends StatelessWidget {
                             width: size.width * 0.4,
                             height: size.height * 0.55,
                             color: ColorConstant.lightTeal,
+                            child: Text(
+                              text.aboutUsContent,
+                              style: textStyle.headline1,
+                            ),
                           ),
                         ],
                       ),

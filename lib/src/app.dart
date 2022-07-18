@@ -48,7 +48,7 @@ class MyApp extends ConsumerWidget {
               darkTheme: darkMode,
               themeMode: themeProvider.themeMode,
               home: const Responsive(
-                  desktop:  DesktopScreen(),
+                  desktop: DesktopScreen(),
                   tablet: DesktopScreen(),
                   mobile: ThirdMobileScreen()
                   //  FirstMobileScreen()

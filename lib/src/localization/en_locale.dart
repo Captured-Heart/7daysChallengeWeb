@@ -60,7 +60,7 @@ class ENLocale implements LocaleInterface {
   String aboutUs = 'About Us';
   
   @override
-  String aboutUsContent = 'ugfruegpfg98upfgeruptfg8erytfg8erypptfg89ptfg9erpufgupt9erppfgterp7tfg89erpfgt7p';
+  String aboutUsContent = 'We surfaced on earth as a UI designer and a Software Developer and decided to create amazing mobile applications aimed at inspiring and motivating other amazing designers and developers. this particular website will contain a 7Day UI and the Code projects which will always be updated upon inspirations and feedbacks.';
   
   @override
   String contactUs = 'Contact Us';
@@ -75,7 +75,8 @@ class ENLocale implements LocaleInterface {
   String marcelEmail = 'knkpozi@gmail.com';
   
   @override
-  String marcelGitHub = 'https://github.com/Captured-Heart' ;
+  String marcelGitHub = '@Captured-Heart' ;
+  // 'https://github.com/Captured-Heart' ;
 
   @override
   String projects = 'Projects';

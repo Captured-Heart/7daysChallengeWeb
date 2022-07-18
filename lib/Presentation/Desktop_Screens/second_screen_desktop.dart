@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seven_days_web/Presentation/Desktop_Screens/project_screen.dart';
+import 'package:seven_days_web/Providers/steam_providers.dart';
 import 'package:seven_days_web/src/utils/color_constant.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -9,12 +10,12 @@ import '../../Providers/utils_providers.dart';
 import '../../src/localization/locale_interface.dart';
 import '../../src/sample_feature/desktop_screen.dart';
 import '../Widgets/bg_screen.dart';
+import '../Widgets/carousel_project_widget.dart';
 import '../Widgets/desktop_navbar_three.dart';
 import '../Widgets/left_side_widget.dart';
 
-
 class SecondScreenDesktop extends ConsumerWidget {
-  const SecondScreenDesktop({
+  SecondScreenDesktop({
     Key? key,
     required this.size,
     required this.text,
@@ -24,10 +25,11 @@ class SecondScreenDesktop extends ConsumerWidget {
   final Size size;
   final LocaleInterface text;
   final TextTheme textStyle;
-
+  final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final switchLists = ref.watch(switchListTileProvider);
+    final projects = ref.watch(fetchProjectProvider);
     return SevenDaysBG(
         size: size,
         navBar: DesktopNavBar3(
@@ -67,22 +69,79 @@ class SecondScreenDesktop extends ConsumerWidget {
                 fit: StackFit.expand,
                 children: [
                   Positioned(
-                    top: size.height * 0.3,
-                    child: switchLists == 0
-                        ? ProjectsWidget(
-                            size: size,
-                            textStyle: textStyle,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: ((context) => const ProjectScreen()),
-                                ),
-                              );
-                            },
-                          )
-                        : CarouselProjectWidget(
-                            textStyle: textStyle, size: size),
+                    top: size.height * 0.28,
+                    child: SizedBox(
+                      height: switchLists == 0 ?size.height * 0.6 : size.height,
+                      width: switchLists == 0
+                          ? size.width * 0.9 
+                          : size.width * 0.8,
+                      child: projects.when(
+                        data: (data) {
+                          return SizedBox(
+                            width: 60,
+                            height: 100,
+                            child: RawScrollbar(
+                              crossAxisMargin: 7,
+                              mainAxisMargin: 2,
+                              thumbColor: Colors.blue[400],
+                              thumbVisibility: true,
+                              trackVisibility: true,
+                              trackBorderColor: Colors.green,
+                              trackColor: Colors.yellow,
+                              minThumbLength: 20,
+                              thickness: 20,
+                              radius: const Radius.circular(20),
+                              // interactive: true,
+                              scrollbarOrientation: switchLists == 0
+                                  ? ScrollbarOrientation.right
+                                  : ScrollbarOrientation.top,
+                              controller: scrollController,
+                              child: ListView.builder(
+                                itemCount: data.length,
+                                controller: scrollController,
+                                padding: const EdgeInsets.all(50),
+                                scrollDirection: switchLists == 0
+                                    ? Axis.vertical
+                                    : Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  var project = data[index];
+                                  return switchLists == 0
+                                      ? ProjectsWidget(
+                                          size: size,
+                                          textStyle: textStyle,
+                                          content: project.content!,
+                                          title: project.title!,
+                                          webUrl: project.webUrl!,
+                                          gitUrl: project.gitHubUrl!,
+                                          imgUrl: project.imgUrl!,
+                                          // date: project.date!.toDate(),
+                                          onTap: () {},
+                                        )
+                                      : CarouselProjectWidget(
+                                          textStyle: textStyle,
+                                          size: size,
+                                          content: project.content!,
+                                          title: project.title!,
+                                          webUrl: project.webUrl!,
+                                          gitUrl: project.gitHubUrl!,
+                                          imgUrl: project.imgUrl!,
+                                          // date: project.date!.toDate(),
+                                        );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        error: (e, _) {
+                          return Center(
+                            child: Text(e.toString()),
+                          );
+                        },
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
                   ),
 
                   //! TOGGLE SWITCH
@@ -103,10 +162,11 @@ class SecondScreenDesktop extends ConsumerWidget {
                         FontAwesomeIcons.square,
                       ],
                       iconSize: 30.0,
-                      borderColor:  [
-                       ColorConstant.lightTeal,
-                       ColorConstant.textBlackColor,
-                       ColorConstant.textWhiteColor,
+                      borderColor: [
+                        ColorConstant.lightTeal,
+                        ColorConstant.textBlackColor,
+                        ColorConstant.textWhiteColor,
+                        Colors.green
 
                         // Color(0xff8b9dc3),
                         // Color(0xff00aeff),
@@ -114,8 +174,8 @@ class SecondScreenDesktop extends ConsumerWidget {
                         // Color(0xff962fbf),
                         // Color(0xff4f5bd5)
                       ],
-                      dividerColor: Colors.blueGrey,
-                      activeBgColors:  [
+                      dividerColor: ColorConstant.darkBgColor,
+                      activeBgColors: [
                         [ColorConstant.textWhiteColor],
                         [ColorConstant.textWhiteColor],
                       ],

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.seven_days_web">
    <application
-        android:label="seven_days_web"
+        android:label="wecode"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

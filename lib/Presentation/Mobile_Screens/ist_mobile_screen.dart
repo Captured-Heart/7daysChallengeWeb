@@ -1,19 +1,25 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:seven_days_web/Presentation/Widgets/bg_screen.dart';
 
 import '../../Providers/app_theme.dart';
+import '../../src/localization/locale_interface.dart';
 import '../../src/localization/locales.dart';
+import '../../src/utils/color_constant.dart';
 import '../Widgets/clip_path_background.dart';
-import '../Widgets/theme_switch.dart';
 
-class FirstMobileScreen extends StatelessWidget {
-  const FirstMobileScreen({Key? key}) : super(key: key);
-
+class IstMobileScreen extends StatelessWidget {
+   IstMobileScreen({Key? key, required this.text, required this.textStyle, required this.size}) : super(key: key);
+final _scaffoldKey = GlobalKey<ScaffoldState>();
+ final LocaleInterface text;
+  final TextTheme textStyle;
+  final Size size;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return SafeArea(
@@ -30,14 +36,47 @@ class FirstMobileScreen extends StatelessWidget {
             clipBehavior: Clip.none,
             height: size.height * 0.1,
             width: size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-                //TODO: ADJUST COLOR
-                color: Theme.of(context).highlightColor),
+              //TODO: ADJUST COLOR
+              color: Theme.of(context).highlightColor,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.access_alarm),
-                ThemeSwitchWeb(themeProvider: themeProvider),
+                Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.asset(
+                        'assets/images/bird.png',
+                        colorBlendMode: BlendMode.darken,
+                        height: kToolbarHeight,
+                        color: Theme.of(context).highlightColor,
+                      ),
+                    ),
+                    Text(
+                      '7Days',
+                      style: GoogleFonts.dancingScript(
+                        wordSpacing: 10,
+                        letterSpacing: 6,
+                        fontSize: 25,
+
+                        // color: Colors.purple
+                      ),
+                    )
+                  ],
+                ),
+                // ThemeSwitchWeb(themeProvider: themeProvider),
+                IconButton(
+                  onPressed: () {
+                    _scaffoldKey.currentState?.openDrawer();
+                  },
+                  icon: const Icon(Icons.menu, size: 40,),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 2,
+                  ),
+                )
               ],
             ),
           ),
@@ -59,14 +98,14 @@ class FirstMobileScreen extends StatelessWidget {
                 //! HI WE ARE HUMANS
                 AutoSizeText.rich(
                   TextSpan(
-                    text: AppLocales.of(context).firstPageHI,
+                    text: text.firstPageHI,
                     style: Theme.of(context).textTheme.headline1!.copyWith(
                           fontSize: 18,
                           fontWeight: FontWeight.w300,
                         ),
                     children: [
                       TextSpan(
-                        text: AppLocales.of(context).firstPageHumans,
+                        text: text.firstPageHumans,
                         style: Theme.of(context).textTheme.headline3!.copyWith(
                               fontSize: 23,
                             ),
@@ -87,14 +126,13 @@ class FirstMobileScreen extends StatelessWidget {
                 ),
                 AutoSizeText.rich(
                   TextSpan(
-                      text: AppLocales.of(context).andWeAre,
-                      style: Theme.of(context)
-                          .textTheme
+                      text: text.andWeAre,
+                      style: textStyle
                           .headline1!
                           .copyWith(fontSize: 22),
                       children: [
                         TextSpan(
-                          text: AppLocales.of(context).firstPageDevelopers,
+                          text: text.firstPageDevelopers,
                           style: Theme.of(context)
                               .textTheme
                               .headline3!
@@ -109,30 +147,27 @@ class FirstMobileScreen extends StatelessWidget {
             //?! UI AND THE CODE
             AutoSizeText.rich(
               TextSpan(
-                  text: AppLocales.of(context).the,
+                  text: text.the,
                   style: Theme.of(context)
                       .textTheme
                       .headline1!
                       .copyWith(fontSize: 18),
                   children: [
                     TextSpan(
-                      text: AppLocales.of(context).ui,
-                      style: Theme.of(context)
-                          .textTheme
+                      text: text.ui,
+                      style: textStyle
                           .headline5!
                           .copyWith(fontSize: 27),
                     ),
                     TextSpan(
-                      text: AppLocales.of(context).andThe,
-                      style: Theme.of(context)
-                          .textTheme
+                      text: text.andThe,
+                      style: textStyle
                           .headline2!
                           .copyWith(fontSize: 18),
                     ),
                     TextSpan(
-                      text: AppLocales.of(context).code,
-                      style: Theme.of(context)
-                          .textTheme
+                      text: text.code,
+                      style: textStyle
                           .headline5!
                           .copyWith(fontSize: 27),
                     )
@@ -142,11 +177,11 @@ class FirstMobileScreen extends StatelessWidget {
 
             //! 7days CHALLENGE
             Text(
-              AppLocales.of(context).sevendays,
+              text.sevendays,
               style: Theme.of(context).textTheme.headline1,
             ),
             AutoSizeText(
-              AppLocales.of(context).challenge,
+              text.challenge,
               style: Theme.of(context).textTheme.headline1,
               textScaleFactor: 1.1,
             ),
@@ -154,7 +189,7 @@ class FirstMobileScreen extends StatelessWidget {
             //! CORNELIUS AND MARCEL PICTURES
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 //! CORNELIUS PICTURE
                 Column(
@@ -171,19 +206,19 @@ class FirstMobileScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      AppLocales.of(context).firstPageCornelius,
-                      style: Theme.of(context)
-                          .textTheme
+                      text.firstPageCornelius,
+                      style: textStyle
                           .headline1!
                           .copyWith(fontSize: 16),
                       // textScaleFactor: 1.1,
                     ),
                     Text(
-                      AppLocales.of(context).firstPageUiDeveloper,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(fontSize: 16),
+                      text.firstPageUiDeveloper,
+                      style: Theme.of(context).textTheme.headline3!.copyWith(
+                            fontSize: 16,
+                            foreground: Paint()
+                              ..color = Theme.of(context).highlightColor,
+                          ),
                     )
                   ],
                 ),
@@ -196,25 +231,24 @@ class FirstMobileScreen extends StatelessWidget {
                       left: false,
                       widget: Image.asset(
                         'assets/images/marcel.png',
-                        width: size.width * 0.25,
+                        width: size.width * 0.28,
                         height: size.height * 0.33,
                         fit: BoxFit.fill,
                       ),
                     ),
                     Text(
-                      AppLocales.of(context).firstPageMarcel,
-                      textScaleFactor: 1.4,
-                      style: Theme.of(context)
-                          .textTheme
+                      text.firstPageMarcel,
+                      style: textStyle
                           .headline1!
                           .copyWith(fontSize: 16),
                     ),
                     Text(
-                      AppLocales.of(context).firstPageFlutterDeveloper,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(fontSize: 14),
+                      text.mobileFlutterDev,
+                      style: Theme.of(context).textTheme.headline3!.copyWith(
+                            fontSize: 14,
+                            foreground: Paint()
+                              ..color = Theme.of(context).highlightColor,
+                          ),
                     ),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seven_days_web/Presentation/Widgets/left_side_widget.dart';
 import 'package:seven_days_web/src/utils/responsive.dart';
 
 class SevenDaysBG extends StatelessWidget {
@@ -33,6 +34,9 @@ class SevenDaysBG extends StatelessWidget {
               color: Theme.of(context).canvasColor,
             ),
           ),
+          Responsive.isMobile(context)
+              ? LeftSideBarContent(size: size)
+              : SizedBox(),
           Positioned(
             left: 0,
             right: 0,

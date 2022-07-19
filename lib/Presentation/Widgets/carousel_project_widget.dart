@@ -1,8 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:seven_days_web/src/utils/responsive.dart';
+
+import '../../src/utils/url_launcher.dart';
+
 
 class CarouselProjectWidget extends StatelessWidget {
-  const CarouselProjectWidget({
+   CarouselProjectWidget({
     Key? key,
     required this.textStyle,
     required this.size,
@@ -16,9 +21,11 @@ class CarouselProjectWidget extends StatelessWidget {
   final TextTheme textStyle;
   final Size size;
   final String title, content, imgUrl, webUrl, gitUrl;
+final UrlLauncherUtil urlLauncherUtil = UrlLauncherUtil();
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -33,21 +40,23 @@ class CarouselProjectWidget extends StatelessWidget {
             height: 30,
           ),
           Container(
-            height: size.height * 0.55,
-            width: size.width * 0.5,
+            height: isMobile ? size.height * 0.48 : size.height * 0.55,
+            width: isMobile ? size.width * 0.85 : size.width * 0.5,
             color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: size.height * 0.45,
+                  height: isMobile ? size.height * 0.4 : size.height * 0.45,
                   width: size.width,
-                  child: Image.network(
-                    imgUrl,
-                    // 'https://images.pexels.com/photos/103123/pexels-photo-103123.jpeg?auto=compress&cs=tinysrgb&w=400',
+                  child: CachedNetworkImage(
+                    imageUrl: imgUrl,
                     height: size.height * 0.45,
                     width: size.width,
                     fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -61,21 +70,30 @@ class CarouselProjectWidget extends StatelessWidget {
                           IconButton(
                             padding: EdgeInsets.symmetric(
                                 horizontal: size.width * 0.02),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await urlLauncherUtil.launchWeb(gitUrl);
+                            },
                             icon: Icon(
                               FontAwesomeIcons.github,
-                              size: size.width * 0.02,
+                              size: isMobile
+                                  ? size.width * 0.07
+                                  : size.width * 0.02,
                               color: Theme.of(context).canvasColor,
                             ),
                           ),
                           IconButton(
                             padding: EdgeInsets.symmetric(
                                 horizontal: size.width * 0.02),
-                            onPressed: () {},
+                            onPressed: () async{
+                              await urlLauncherUtil.launchWeb(webUrl);
+
+                            },
                             icon: Icon(
                               FontAwesomeIcons.arrowUpRightFromSquare,
                               color: Theme.of(context).canvasColor,
-                              size: size.width * 0.02,
+                              size: isMobile
+                                  ? size.width * 0.07
+                                  : size.width * 0.02,
                             ),
                           ),
                         ],

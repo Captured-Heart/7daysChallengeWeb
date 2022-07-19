@@ -80,4 +80,7 @@ class ENLocale implements LocaleInterface {
 
   @override
   String projects = 'Projects';
+  
+  @override
+  String mobileFlutterDev = 'Flutter Dev';
 }

@@ -26,6 +26,7 @@ abstract class LocaleInterface {
   String marcelGitHub = '';
   String aboutUsContent = '';
   String projects = '';
+  String mobileFlutterDev = '';
   //
 
 }

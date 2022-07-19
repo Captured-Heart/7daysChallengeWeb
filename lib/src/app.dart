@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'
     hide Provider, ChangeNotifierProvider;
 import 'package:provider/provider.dart';
+import 'package:seven_days_web/Presentation/Mobile_Screens/ist_mobile_screen.dart';
+import 'package:seven_days_web/Presentation/Mobile_Screens/second_mobile_screen.dart';
 import 'package:seven_days_web/Presentation/Mobile_Screens/third_mobile_screen.dart';
 import 'package:seven_days_web/Providers/app_theme.dart';
 import 'package:seven_days_web/src/utils/responsive.dart';
@@ -45,27 +47,13 @@ class MyApp extends ConsumerWidget {
               onGenerateTitle: (BuildContext context) =>
                   AppLocalizations.of(context)!.appTitle,
               theme: darkMode,
-              darkTheme: darkMode,
+              darkTheme: lightMode,
               themeMode: themeProvider.themeMode,
-              home: const Responsive(
-                  desktop: DesktopScreen(),
-                  tablet: DesktopScreen(),
-                  mobile: ThirdMobileScreen()
-                  //  FirstMobileScreen()
-                  // SafeArea(
-                  //   child: PageViewJ(
-                  //     modifier: const Modifier(
-                  //       viewportFraction: 0.23,
-                  //       padEnds: false,
-                  //       scrollDirection: Axis.vertical,
-                  //     ),
-                  //     transform: CubeTransform(),
-                  //     itemBuilder: (context, index) {
-                  //       return const FirstMobileScreen();
-                  //     },
-                  //   ),
-                  // ),
-                  )
+              home:  Responsive(
+                desktop: DesktopScreen(),
+                tablet: DesktopScreen(),
+                mobile: SecondMobileScreen()
+              )
               // onGenerateRoute: (RouteSettings routeSettings) {
               //   return MaterialPageRoute<void>(
               //     settings: routeSettings,

@@ -30,13 +30,14 @@ class MobileScreenState extends ConsumerState<MobileScreen> {
     final textStyle = Theme.of(context).textTheme;
     final text = AppLocales.of(context);
     return Scaffold(
+      // key: ,
         // backgroundColor: ColorConstant.darkBgColor,
         body: SizedBox(
       height: size.height,
       width: size.width,
       child: PageView(
         scrollDirection: Axis.vertical,
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         pageSnapping: false,
         padEnds: false,
         allowImplicitScrolling: true,

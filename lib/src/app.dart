@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'
     hide Provider, ChangeNotifierProvider;
 import 'package:provider/provider.dart';
 import 'package:seven_days_web/Presentation/Mobile_Screens/ist_mobile_screen.dart';
+import 'package:seven_days_web/Presentation/Mobile_Screens/mobile_screen.dart';
 import 'package:seven_days_web/Presentation/Mobile_Screens/second_mobile_screen.dart';
 import 'package:seven_days_web/Presentation/Mobile_Screens/third_mobile_screen.dart';
 import 'package:seven_days_web/Providers/app_theme.dart';
@@ -49,10 +50,10 @@ class MyApp extends ConsumerWidget {
               theme: darkMode,
               darkTheme: lightMode,
               themeMode: themeProvider.themeMode,
-              home:  Responsive(
+              home: const Responsive(
                 desktop: DesktopScreen(),
                 tablet: DesktopScreen(),
-                mobile: SecondMobileScreen()
+                mobile: MobileScreen()
               )
               // onGenerateRoute: (RouteSettings routeSettings) {
               //   return MaterialPageRoute<void>(

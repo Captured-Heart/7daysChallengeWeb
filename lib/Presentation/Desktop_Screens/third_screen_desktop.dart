@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seven_days_web/Presentation/Widgets/bg_screen.dart';
 import 'package:seven_days_web/Presentation/Widgets/desktop_navbar_three.dart';
+import 'package:seven_days_web/Providers/steam_providers.dart';
 import 'package:seven_days_web/src/localization/locales.dart';
+import 'package:seven_days_web/src/utils/url_launcher.dart';
 
 import '../../src/localization/locale_interface.dart';
 import '../../src/utils/color_constant.dart';
 import '../Widgets/dashed_lines.dart';
 
-class ThirdScreenDesktop extends StatelessWidget {
-  const ThirdScreenDesktop({
+class ThirdScreenDesktop extends ConsumerWidget {
+   ThirdScreenDesktop({
     Key? key,
     required this.size,
     required this.text,
@@ -19,9 +22,11 @@ class ThirdScreenDesktop extends StatelessWidget {
   final Size size;
   final LocaleInterface text;
   final TextTheme textStyle;
-
+final UrlLauncherUtil urlLauncherUtil = UrlLauncherUtil();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final socialLink = ref.watch(fetchSocialProvider);
+    final links = socialLink.value?.first;
     return SevenDaysBG(
       size: size,
       navBar: DesktopNavBar3(
@@ -151,6 +156,9 @@ class ThirdScreenDesktop extends StatelessWidget {
                               // mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 ListTile(
+                                  onTap: () async{
+                                  await  urlLauncherUtil.launchWeb(links!.emailCornel!);
+                                  },
                                   leading: Icon(
                                     FontAwesomeIcons.envelope,
                                     size: size.width * 0.022,
@@ -165,6 +173,9 @@ class ThirdScreenDesktop extends StatelessWidget {
                                   height: 10,
                                 ),
                                 ListTile(
+                                  onTap: () async{
+                                   await urlLauncherUtil.launchWeb(links!.gitCornel!);
+                                  },
                                   leading: Icon(
                                     FontAwesomeIcons.github,
                                     size: size.width * 0.022,
@@ -181,6 +192,9 @@ class ThirdScreenDesktop extends StatelessWidget {
                                   height: size.height * 0.07,
                                 ),
                                 ListTile(
+                                  onTap: () async{
+                                   await urlLauncherUtil.launchWeb(links!.emailKc!);
+                                  },
                                   leading: Icon(
                                     FontAwesomeIcons.envelope,
                                     size: size.width * 0.022,
@@ -195,6 +209,10 @@ class ThirdScreenDesktop extends StatelessWidget {
                                   height: 10,
                                 ),
                                 ListTile(
+                                    onTap: () async{
+                                      await urlLauncherUtil.launchWeb(links!.gitKc!);
+                                    },
+
                                   leading: Icon(
                                     FontAwesomeIcons.github,
                                     size: size.width * 0.022,

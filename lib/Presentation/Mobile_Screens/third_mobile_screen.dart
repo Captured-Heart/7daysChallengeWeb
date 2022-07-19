@@ -1,21 +1,30 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seven_days_web/Presentation/Widgets/bg_screen.dart';
 import 'package:seven_days_web/Presentation/Widgets/dashed_lines.dart';
+import 'package:seven_days_web/Providers/steam_providers.dart';
+import 'package:seven_days_web/src/utils/url_launcher.dart';
 
 import '../../src/localization/locale_interface.dart';
 import '../Widgets/mobile/third_mobile_navbar.dart';
 
-class ThirdMobileScreen extends StatelessWidget {
-  const ThirdMobileScreen(
-      {Key? key, required this.text, required this.textStyle, required this.size})
+class ThirdMobileScreen extends ConsumerWidget {
+  ThirdMobileScreen(
+      {Key? key,
+      required this.text,
+      required this.textStyle,
+      required this.size})
       : super(key: key);
   final LocaleInterface text;
   final TextTheme textStyle;
   final Size size;
+  final UrlLauncherUtil urlLauncherUtil = UrlLauncherUtil();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final socialLink = ref.watch(fetchSocialProvider);
+    final links = socialLink.value?.first;
     return SafeArea(
       child: Scaffold(
         body: SevenDaysBG(
@@ -101,6 +110,10 @@ class ThirdMobileScreen extends StatelessWidget {
 
                                   //!marcel part
                                   ListTile(
+                                    onTap: () async {
+                                      await urlLauncherUtil
+                                          .launchWeb(links!.emailCornel!);
+                                    },
                                     dense: true,
                                     horizontalTitleGap: 1,
                                     minVerticalPadding: 1,
@@ -120,6 +133,10 @@ class ThirdMobileScreen extends StatelessWidget {
                                     ),
                                   ),
                                   ListTile(
+                                    onTap: () async {
+                                      await urlLauncherUtil
+                                          .launchWeb(links!.gitCornel!);
+                                    },
                                     dense: true,
                                     horizontalTitleGap: 1,
 
@@ -152,6 +169,10 @@ class ThirdMobileScreen extends StatelessWidget {
 
                                   //! marcel footer
                                   ListTile(
+                                    onTap: () async {
+                                      await urlLauncherUtil
+                                          .launchWeb(links!.emailKc!);
+                                    },
                                     dense: true,
                                     horizontalTitleGap: 1,
                                     minVerticalPadding: 1,
@@ -171,16 +192,18 @@ class ThirdMobileScreen extends StatelessWidget {
                                     ),
                                   ),
                                   ListTile(
+                                    onTap: () async {
+                                      await urlLauncherUtil
+                                          .launchWeb(links!.gitKc!);
+                                    },
                                     dense: true,
                                     horizontalTitleGap: 1,
-
                                     leading: Icon(
                                       FontAwesomeIcons.github,
                                       size: size.width * 0.06,
                                       color: IconTheme.of(context).color,
                                       // color:
                                     ),
-                                    //TODO: ADD URL LINK TO THIS GITHUB AND EMAIL LINKS
                                     title: Text(
                                       text.marcelGitHub,
                                       style: Theme.of(context)
@@ -205,4 +228,3 @@ class ThirdMobileScreen extends StatelessWidget {
     );
   }
 }
-

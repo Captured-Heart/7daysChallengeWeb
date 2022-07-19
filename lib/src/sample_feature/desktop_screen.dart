@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seven_days_web/Presentation/Desktop_Screens/ist_screen_desktop.dart';
 import 'package:seven_days_web/src/localization/locales.dart';
+import 'package:seven_days_web/src/utils/url_launcher.dart';
 
 import '../../Presentation/Desktop_Screens/second_screen_desktop.dart';
 import '../../Presentation/Desktop_Screens/third_screen_desktop.dart';
@@ -56,7 +57,7 @@ class DesktopScreenState extends ConsumerState<DesktopScreen> {
 }
 
 class ProjectsWidget extends StatelessWidget {
-  const ProjectsWidget({
+   ProjectsWidget({
     Key? key,
     required this.size,
     required this.textStyle,
@@ -73,6 +74,7 @@ class ProjectsWidget extends StatelessWidget {
   final TextTheme textStyle;
   final VoidCallback onTap;
   final String title, content, imgUrl, webUrl, gitUrl;
+  final UrlLauncherUtil urlLauncherUtil = UrlLauncherUtil();
   // final DateTime? date;
   @override
   Widget build(BuildContext context) {
@@ -114,9 +116,14 @@ class ProjectsWidget extends StatelessWidget {
                       const SizedBox(
                         width: 30,
                       ),
-                      Icon(
-                        FontAwesomeIcons.arrowUpRightFromSquare,
-                        color: Theme.of(context).highlightColor,
+                      GestureDetector(
+                        onTap: () async{
+                          await urlLauncherUtil.launchWeb(webUrl);
+                        },
+                        child: Icon(
+                          FontAwesomeIcons.arrowUpRightFromSquare,
+                          color: Theme.of(context).highlightColor,
+                        ),
                       )
                     ],
                   ),

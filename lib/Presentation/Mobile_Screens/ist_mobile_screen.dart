@@ -9,6 +9,7 @@ import '../../src/localization/locale_interface.dart';
 import '../../src/localization/locales.dart';
 import '../../src/utils/color_constant.dart';
 import '../Widgets/clip_path_background.dart';
+import '../Widgets/theme_switch.dart';
 
 class IstMobileScreen extends StatelessWidget {
    IstMobileScreen({Key? key, required this.text, required this.textStyle, required this.size}) : super(key: key);

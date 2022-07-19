@@ -4,24 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seven_days_web/src/utils/url_launcher.dart';
 
-import '../../../src/localization/locales.dart';
 import '../../../src/utils/color_constant.dart';
 import '../dashed_lines.dart';
 
 class MobileProjectListCard extends StatelessWidget {
-  const MobileProjectListCard({
+  MobileProjectListCard({
     Key? key,
-   required  this.size,
-     this.title,
-     this.gitUrl,
-     this.webUrl,
-     this.content,
-     this.imgUrl, this.date,
+    required this.size,
+    this.title,
+    this.gitUrl,
+    this.webUrl,
+    this.content,
+    this.imgUrl,
+    this.date,
   }) : super(key: key);
 
   final Size size;
-  final String ? title, gitUrl, webUrl, content, imgUrl;
-  final DateTime ? date;
+  final String? title, gitUrl, webUrl, content, imgUrl;
+  final DateTime? date;
   final UrlLauncherUtil urlLauncherUtil = UrlLauncherUtil();
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class MobileProjectListCard extends StatelessWidget {
                 //TODO: ADD URLlINK TO SOCIAL ICONS
                 IconButton(
                     onPressed: () async {
-                   await   urlLauncherUtil.launchWeb(webUrl!);
+                      await urlLauncherUtil.launchWeb(webUrl!);
                     },
                     icon: const Icon(
                       FontAwesomeIcons.arrowUpRightFromSquare,
@@ -83,6 +83,8 @@ class MobileProjectListCard extends StatelessWidget {
               MobileProjectLeftCard(
                 size: size,
                 contents: content!,
+                webUrl: webUrl!,
+                gitUrl: gitUrl!,
               ),
             ],
           ),
@@ -93,14 +95,15 @@ class MobileProjectListCard extends StatelessWidget {
 }
 
 class MobileProjectLeftCard extends StatelessWidget {
-  const MobileProjectLeftCard({
+   MobileProjectLeftCard({
     Key? key,
     required this.size,
-     required this.contents,
+    required this.contents, required this.webUrl, required this.gitUrl,
   }) : super(key: key);
 
+final UrlLauncherUtil urlLauncherUtil = UrlLauncherUtil();
   final Size size;
-  final String contents;
+  final String contents, webUrl, gitUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -127,7 +130,6 @@ class MobileProjectLeftCard extends StatelessWidget {
               ),
               child: AutoSizeText(
                 contents,
-
                 style: Theme.of(context).textTheme.headline2?.copyWith(
                       color: ColorConstant.darkBgColor,
                       fontWeight: FontWeight.w600,
@@ -150,14 +152,18 @@ class MobileProjectLeftCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async{
+                  await  urlLauncherUtil.launchWeb(gitUrl);
+                  },
                   icon: Icon(
                     FontAwesomeIcons.github,
                     color: Theme.of(context).canvasColor,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async{
+                   await urlLauncherUtil.launchWeb(webUrl);
+                  },
                   icon: Icon(
                     FontAwesomeIcons.arrowUpRightFromSquare,
                     color: Theme.of(context).canvasColor,

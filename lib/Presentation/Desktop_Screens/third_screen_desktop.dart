@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seven_days_web/Presentation/Widgets/bg_screen.dart';
 import 'package:seven_days_web/Presentation/Widgets/desktop_navbar_three.dart';
 import 'package:seven_days_web/Providers/steam_providers.dart';
-import 'package:seven_days_web/src/localization/locales.dart';
 import 'package:seven_days_web/src/utils/url_launcher.dart';
 
 import '../../src/localization/locale_interface.dart';
